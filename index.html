@@ -553,8 +553,52 @@ Besides, how much time do you spend creating versus modifying files?
 
 Benefits >> problems!!!
 
+---
 
-<img src='images/so-many-files.png' title='So Many Files' class='so-many-files'>
+class: middle, center ,blue
+
+## Absolute versus relative paths
+
+
+---
+
+class: middle, has-code
+
+## Relative paths:
+
+```JS
+React = require 'React'
+
+FooBar = require('../../../FooBar')
+ThingyThing = require('../../ThingyThing')
+
+module.exports = React.createClass
+
+  render: function(...
+
+```
+
+Can you imagine moving this file? Nightmare!
+
+---
+
+class: middle, has-code
+
+## Absolute paths:
+
+```JS
+React = require 'React'
+
+FooBar = require('components/FooBar')
+ThingyThing = require('components/ThingyThing')
+
+module.exports = React.createClass
+
+  render: function(...
+
+```
+
+Much nicer!
 
 
 
