@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>A Whilstle-Stop Tour of a Production Frontend Stack | Timecounts.org</title>
+    <title>A Whistle-Stop Tour of a Production Frontend Stack | Timecounts.org</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
 
@@ -17,7 +17,7 @@
       .tc-blue { color: #16BECC; }
       .tc-blue-fade { color: #6DD6DF; }
       .tc-navy { color: #2B497F; }
-      .tc-nav-fade { color: #7D8FB0; }
+      .tc-navy-fade { color: #7D8FB0; }
       .tc-green { color: #5DC744; }
       .tc-green-fade { color: #9CDBA5; }
       .tc-soft-blue { color: #66ADC7; }
@@ -45,7 +45,7 @@
       }
 
       .remark-slide-content h1 {
-        font-size: 3.5em;
+        font-size: 3.0em;
         line-height: 110%
       }
 
@@ -62,18 +62,10 @@
 
       /* ----- Timecounts styles ----- */
 
-      .title-page-logo {
-        width: 100px;
-        margin-bottom: 40px;
-      }
-
-      .react-logo {
-        width: 500px;
-      }
-
       body {
         font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
       }
+
       h1, h2, h3, p {
         font-weight: normal;
         color: #60545C;
@@ -82,7 +74,6 @@
       p, h3 {
         font-size: 1.8em;
       }
-
 
       a {
         color: #16BECC
@@ -98,18 +89,29 @@
         border: 2px solid #EBEAEA;
       }
 
-
       .aside {
         font-size: 1em;
         color: #ADA7AB
 
       }
 
+      .title-page-logo {
+        width: 100px;
+        margin-bottom: 40px;
+      }
+
+      .timecounts-is {
+        background-image: url('images/volunteers.jpg');
+      }
+
+
+
       /* ----- Template styles ----- */
 
       .brown {
         background: #6F646C
       }
+
       .brown h1,
       .brown h2,
       .brown p,
@@ -120,9 +122,11 @@
       .blue {
         background: #26B9C4;
       }
+
       .blue h1, .blue h2, .blue h3 {
         color: white
       }
+
       .blue p {
         color: #2B497F;
       }
@@ -138,23 +142,6 @@
         background-position-x: center !important;
         background-position-y: center !important;
         background-repeat: no-repeat !important
-      }
-
-      .title-page {
-        padding-right: 320px;
-      }
-
-      .title-page .backbone-image {
-        background-image: url('images/backbone.jpg');
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        width: 280px;
-      }
-
-      .title-page p {
-        font-size: 1.4em;
       }
 
       /* ----- Code ----- */
@@ -176,6 +163,7 @@
         font-family: Monaco, "Lucida Console", monospace;
         font-size: 0.8em;
       }
+
       .remark-inline-code {
         color: #2B497F
       }
@@ -272,6 +260,20 @@
   </head>
   <body>
     <script id="source" language="remarkjs"><!--
+
+
+class: title-page, blue
+<img src='images/logo-white.png' title='Timecounts Logo' class='title-page-logo'>
+# A Whistle-Stop Tour of a Production Fronend Stack
+
+Jof Arnold, VP Product and Frontend Dev
+
+Timecounts.org
+
+<div class='backbone-image cover'></div>
+
+
+---
 
 class: timecounts-is, cover
 
