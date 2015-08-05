@@ -600,6 +600,36 @@ module.exports = React.createClass
 
 Much nicer!
 
+---
+
+class: middle
+
+## How?
+
+`parallel-transpile` transpiles the CJSX components from `/src` to `/build/node_modules`
+
+More about that later...
+
+---
+
+class: middle
+
+## We don't put extensions in paths
+
+
+So none of this: `/components/Blah.cjsx`
+
+---
+
+class: middle
+
+## Reason:
+
+So webpack can search for the best thing that matches that file, which may be an already-compiled asset.
+
+So we can change to the latest hipster syntax/language whenever we want. E.g. lit
+
+
 
 
 
