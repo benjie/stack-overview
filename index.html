@@ -309,11 +309,112 @@ class: middle
 
 1. To introduce new devs to a production frontend stack
 
-2. Show what's worked and not worked for us
+2. Show what&rsquo;s worked and not worked for us
 
 3. Learn from the audience
 
+---
 
+
+class: middle, center, brown
+
+#1. React, (C)JSX
+
+---
+
+class: middle
+
+# React.js key concepts
+
+One-way data flow (`state`, `props`)
+
+Virtual DOM
+
+Components
+
+
+---
+
+class: middle, has-code
+
+## Components, props & state:
+
+```JS
+Child = React.createClass(
+  render: function() {
+    <div>
+      Is clicked? { this.props.clicked }
+    </div>
+  }
+);
+
+Parent = React.createClass(
+  getInititalState: function() {
+    clicked: false
+  },
+  handleClick: function() {
+    this.setState( {clicked: true} )
+  },
+  render: function() {
+    <div>
+      <div onClick={ this.handleClick }>Click Me</div>
+      <Child clicked={ this.state.clicked } />
+    </div>
+  }
+);
+```
+
+---
+
+class: middle
+
+# CoffeeScript sneakiness
+
+We use CoffeeScript... And we noticed a cunning trick
+
+---
+
+class: middle, has-code
+
+## Look how quick we can write code!
+
+```CoffeeScript
+{div, p} = React.DOM
+
+MyComponent = React.createClass
+
+  render: ->
+    div className: "foo",
+      div className: "sub-foo",
+        p null, "Something goes here"
+
+```
+
+---
+
+class: middle, has-code
+
+## This was a mistake. Unreadable:
+
+```CoffeeScript
+{div, p} = React.DOM
+
+MyComponent = React.createClass
+
+  render: ->
+    div className: "foo",
+      div className: "sub-foo",
+        if @props.flag
+          for i in @props.array
+            div null, "Count is #{i}
+            break if i > 1
+        else
+          if @props.other
+            div null, "Stuff"
+
+```
+
+---
 
 
 --></script>
