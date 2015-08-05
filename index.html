@@ -73,6 +73,13 @@
         color: #6DD6DF
       }
 
+      .hljs-default .hljs,
+      .hljs-default .hljs-subst,
+      .hljs-default .hljs-tag .hljs-title,
+      .hljs-default .nginx .hljs-title {
+        color: #9CDBA5
+      }
+
 
       /* ----- Timecounts styles ----- */
 
@@ -406,15 +413,17 @@ MyComponent = React.createClass
       div className: "sub-foo",
         if @props.flag
           for i in @props.array
-            div null, "Count is #{i}
-            break if i > 1
+            div null, "Count is #{i}"
+            break if i > 10
         else
           if @props.other
-            div null, "Stuff"
+            div null, "Not counting"
 
 ```
 
 ---
+
+
 
 
 --></script>
