@@ -658,6 +658,112 @@ class: middle, center
 
 ## Which brings us nicely to:
 
+---
+
+class: middle, center, brown
+
+# 3. Styles
+
+
+---
+class: middle
+
+# CSS is global.
+
+The chances of getting accidental overrides is high. Especially with our >9000 selectors!
+
+
+---
+
+class: middle
+
+# Many solutions:
+
+### OOCSS
+### BEM
+### Radium
+
+---
+
+class: middle, has-code, zoom-code
+
+## Our flavour of BEM
+
+"Conventional":
+### `componentName_blockName--modifier`
+
+Us:
+### `ComponentName_blockName__modifier`
+
+---
+
+# Why?
+
+Double-click and `ciw` in vim :)
+
+---
+class: middle, has-code, zoom-code
+
+## This is not good:
+
+```CoffeeScript
+render: ->
+  <div className={
+    "Foo Foo__#{if @props.active then 'active' else ''}"
+  }>
+    Hello!
+  </div>
+
+```
+
+```SASS
+.Foo
+  font-size: 15px
+  color: red
+  &__active
+    color: blue
+```
+
+---
+
+class: middle
+
+
+## Why's this a bad idea?
+
+First, can't grep for "Foo__active" if you see it in the DOM
+
+Second, `Foo__active` overrides the color on `Foo`. Overrides are bad
+
+---
+
+class: middle, has-code
+
+## Better:
+
+```CoffeeScript
+classNames = require 'classnames' # a React module
+
+...
+
+render: ->
+  classes = "Foo",
+    Foo__active: @props.active
+    Foo__inactive: !@props.active
+  <div className={ classes }>
+    Hello!
+  </div>
+```
+
+```SASS
+.Foo
+  font-size: 15px
+.Foo__inactive
+  color: red
+.Foo__active
+  color: blue
+```
+
 
 
 
