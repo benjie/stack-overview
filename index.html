@@ -775,15 +775,15 @@ class: middle
 
 ## Why's this a bad idea?
 
-1) can't grep for `Foo__active` if you see it in the DOM
+1. can't grep for `Foo__active` if you see it in the DOM
 
-2) `Foo__active` overrides the color on `Foo`. Overrides beget overrides beget overrides
+2. `Foo__active` overrides the color on `Foo`. Overrides beget overrides beget overrides
 
 ---
 
 class: middle, has-code
 
-### Better (also made easier with React classnames module):
+### Better (also made easier with React `classnames` module):
 
 ```CoffeeScript
 classNames = require 'classnames' # a React module
