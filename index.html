@@ -777,6 +777,67 @@ render: ->
   color: blue
 ```
 
+---
+
+class: middle, center, brown
+
+# 4. Build
+
+---
+
+## Main tools on dev:
+
+- `grunt concurrent`
+- `gulp`
+- `webpack`
+- `parallel-transpile`
+- `meh` 
+
+---
+
+
+### `grunt`
+
+Runs tasks such as compiling and copying files
+
+
+### `grunt-concurrent`
+
+Runs grunt tasks in parallel on multiple threads. Specifically:
+- stylus (legacy css pre-processor)
+- handlebars (legacy templates)
+- copy
+
+
+---
+
+### `gulp`
+- Watches for changes in sass files and compiles (gulp sass)
+- Manually can lint sass files on change (gulp-scss-lint)
+
+
+### `webpack`
+
+- Merging assets
+
+
+---
+
+timecounts mehserve (github)
+- Proxy blah
+- diagram
+(allows multiple local servers to share port 80. Think Pow with websockets)
+---
+
+### `parallel-transpile` (github)
+- copies JSON, compiles coffee, CJSX, etc.
+- Outsources everything to webpack transpilers. 8 cores!
+
+
+### `react-hot-loader`
+
+- Auto-updating components whilst keeping state etc. Awesome.
+
 
 
 
