@@ -392,7 +392,7 @@ class: middle
 
 # Goals
 
-1. To introduce new devs an idea of what a production frontend stack might look like
+1. To give new devs an idea of what a production frontend stack might look like
 
 2. Show what&rsquo;s worked and not worked for us
 
@@ -681,9 +681,12 @@ class: middle
 
 ## Reasons:
 
-So webpack can search for the best thing that matches that file, which may be an already-compiled asset.
+So webpack and node can pick the best thing - compiled asset if it exists,
+source otherwise
 
-So we can change to the latest hipster syntax/language whenever we want. E.g. lit
+Allows us to change any file to the latest hipster syntax/language whenever
+we want without having to rewrite dependants. E.g. moving from `.coffee` to
+`.cjsx`
 
 
 ---
@@ -788,7 +791,7 @@ class: middle, has-code, zoom-code
 
 ```JSX
 <div className={
-  "Foo Foo__#{if @props.active then 'active' else ''}"
+  "Foo Foo__" + (this.props.active ? 'active' : 'inactive')
 }>
   Hello!
 </div>
@@ -818,7 +821,7 @@ class: middle
 
 class: middle, has-code
 
-### Better (also made easier with React `classnames` module):
+### Better (also easier with React `classnames` module):
 
 ```CoffeeScript
 classNames = require 'classnames' # a React module
@@ -826,9 +829,10 @@ classNames = require 'classnames' # a React module
 ...
 
 render: ->
-  classes = "Foo",
-    Foo__active: @props.active
+  classes = classNames "Foo",
+    Foo__active: @props.active,
     Foo__inactive: !@props.active
+
   <div className={ classes }>
     Hello!
   </div>
@@ -854,11 +858,11 @@ class: middle, center, brown
 class: middle
 ## Main tools on dev:
 
-- `grunt-concurrent`
+- `grunt`
 - `gulp`
 - `webpack`
 - `parallel-transpile`
-- `meh`
+- `mehserve`
 
 ---
 
@@ -872,7 +876,7 @@ class: middle
 ### `grunt-concurrent`
 
 - Runs grunt tasks in parallel on multiple threads. Specifically:
-  - stylus (legacy css pre-processor)
+  - stylus (legacy CSS pre-processor)
   - handlebars (legacy templates)
   - copy
 
@@ -887,23 +891,35 @@ class: middle
 
 ### `webpack`
 
-- Merging assets
+- Bundles assets for the browser
+- Uglifies in production
+- Hot loader in development!
 
 
 ---
 
 class: middle
-timecounts mehserve (github)
-- Proxy blah
+timecounts `mehserve` (github)
+- Uses `Host` header to proxy port 80 requests to named services
+- Trivial to configure  
+  `mehserve myservice 1337 && open http://myservice.meh/`
+- Can serve static assets too  
+  `mehserve whatever $(pwd) && open http://whatever.meh/`
+- Also supports `.dev` domains
+- Like pow.cx, but supports websockets!
+- Still under development (ugly errors, OSX instructions only)
 - diagram
-(allows multiple local servers to share port 80. Think Pow with websockets)
 ---
 
 class: middle
-### `parallel-transpile` (github)
-- copies JSON, compiles coffee, CJSX, etc.
-- Outsources everything to webpack transpilers.
-- 8 cores == super fast
+### timecounts `parallel-transpile` (github)
+- uses all CPU cores to transpile source files quickly
+- supports many webpack loaders and loader-chains  
+  e.g. cjsx -> coffee -> jsx -> js
+- incremental updates (using file modification timestamps)
+- used with webpack can speed up build times significantly
+- suitable for one-to-one transpiles only
+- experimental source map support (JS only)
 
 ---
 class: middle, has-code
@@ -935,8 +951,10 @@ class: middle
 
 
 - More maintainable code
+- Helps prevent cruft accumulating
 - Catches bugs
 - Sets coding styles: easier to work with a team
+- Shrinks compiled code size
 
 ---
 
@@ -1016,13 +1034,6 @@ Useful stuff:
 https://github.com/sturobson/BEM-resources
 
 Heroku review apps
-
----
-
-
-
----
-
 --></script>
     <script src="remark-latest.min.js">
     </script>
