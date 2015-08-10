@@ -595,17 +595,17 @@ class: middle, center ,blue
 
 ---
 
-class: middle, has-code
+class: middle, has-code, zoom-code
 
 ## Relative paths:
 
 ```JS
-React = require 'React'
+var React = require('React');
 
-FooBar = require('../../../FooBar')
-ThingyThing = require('../../ThingyThing')
+var FooBar = require('../../../FooBar');
+var ThingyThing = require('../../ThingyThing');
 
-module.exports = React.createClass
+module.exports = React.createClass(
 
   render: function(...
 
@@ -615,17 +615,17 @@ Can you imagine moving this file? Nightmare!
 
 ---
 
-class: middle, has-code
+class: middle, has-code, zoom-code
 
 ## Absolute paths:
 
 ```JS
-React = require 'React'
+var React = require('React');
 
-FooBar = require('components/FooBar')
-ThingyThing = require('components/ThingyThing')
+var FooBar = require('components/FooBar');
+var ThingyThing = require('components/ThingyThing');
 
-module.exports = React.createClass
+module.exports = React.createClass(
 
   render: function(...
 
