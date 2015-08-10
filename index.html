@@ -749,15 +749,14 @@ No serious reason: looks nice and can double-click for C+P in dev tools and `ciw
 ---
 class: middle, has-code, zoom-code
 
-### Auto-generating class names in sass and jsx & overriding styles found to be bad;
+### Auto-generating class name fragements in sass and JSX found to be bad. As is overriding styles.
 
-```CoffeeScript
-render: ->
-  <div className={
-    "Foo Foo__#{if @props.active then 'active' else ''}"
-  }>
-    Hello!
-  </div>
+```JSX
+<div className={
+  "Foo Foo__#{if @props.active then 'active' else ''}"
+}>
+  Hello!
+</div>
 
 ```
 
