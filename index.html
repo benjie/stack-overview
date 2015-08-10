@@ -717,7 +717,7 @@ No serious reason: looks nice and can double-click for C+P in dev tools and `ciw
 ---
 class: middle, has-code, zoom-code
 
-## This is not good:
+### Auto-generating class names in sass and jsx & overriding styles found to be bad;
 
 ```CoffeeScript
 render: ->
@@ -744,15 +744,15 @@ class: middle
 
 ## Why's this a bad idea?
 
-First, can't grep for "Foo__active" if you see it in the DOM
+1) can't grep for `Foo__active` if you see it in the DOM
 
-Second, `Foo__active` overrides the color on `Foo`. Overrides are bad
+2) `Foo__active` overrides the color on `Foo`. Overrides beget overrides beget overrides
 
 ---
 
 class: middle, has-code
 
-## Better:
+### Better (also made easier with React classnames module):
 
 ```CoffeeScript
 classNames = require 'classnames' # a React module
