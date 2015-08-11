@@ -999,14 +999,25 @@ class: middle, has-code
 <img src='images/coffee-lint.png' title='coffee lint' class='coffee-lint' />
 
 ---
-
+class: middle, has-code
 ## Acceptance tests (selenium)
 
 - Automated testing in the browser
 - Simulates clicks, scrolls etc
 - Scripted using e.g. CoffeeScript
 
-<img src='images/spec.png' title='Test Spec' class='spec' />
+```CoffeeScript
+yt 'homepage', ->
+  yield @start("http://#{@browser.rootHost}/")
+  aboutDisplayed = yield @browser.elementByCss("._qa_footerAbout").isDisplayed()
+  aboutDisplayed.should.be.true
+  formDisplayed = yield @browser.elementByCss("._qa_mc-embedded-subscribe-form input[name='EMAIL']").isDisplayed()
+  formDisplayed.should.be.true
+  yield @browser.elementByCss("._qa_homeLogin").click()
+  yield @browser.waitFor(wd.asserters.loaded)
+  url = yield @browser.url()
+  url.should.equal("http://#{@browser.rootHost}/login")
+```
 ---
 
 ### E.g. looks like this in practice:
