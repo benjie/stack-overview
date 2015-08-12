@@ -423,7 +423,7 @@ class: middle
 
 # Stuff we'll cover
 
-1. Keeping on top of React
+1. Keeping on top of React code
 
 2. Handling lots of files
 
@@ -594,15 +594,15 @@ getValue: function() {
 },
 render: function() {
   <div>
-    <Input  onKeyUp={ this.handleKeyUp } ... blah />
-    <Selector ... blah />
+    <Input onKeyUp={ this.handleKeyUp } ... blah />
+    <Selector ref="selector" ... blah />
   </div>
 }
 
 // Selector
 moveSelection: function() {
   var newSelectedId = this.state.selectedId + 1;
-  this.setState({selectedId: newSelectedId })
+  this.setState({selectedId: newSelectedId})
 }
 
 ```
@@ -615,14 +615,14 @@ class: middle, has-code
 // Typeahead
 handleKeyUp: function() {
   var newSelectedId = this.state.selectedId + 1;
-  this.setState({selectedId: newSelectedId })
+  this.setState({selectedId: newSelectedId})
 },
 getValue: function() {
   return this.state.selectedId
 },
 render: function() {
   <div>
-    <Input  onKeyUp={ this.handleKeyUp } ... blah />
+    <Input onKeyUp={ this.handleKeyUp } ... blah />
     <Selector selectedid={ this.state.selectedId } ... blah />
   </div>
 }
@@ -643,13 +643,13 @@ class: middle, has-code, zoom-code
 
 ## Reduces ambiguity
 
-```CoffeeScript
-propTypes:
-  names: React.PropTypes.arrayOf(React.PropTypes.string)
-  people: React.PropTypes.typeOf(SomeCollectionOrSomething)
-  isWarning: React.ProTypes.bool
+```JS
+propTypes: {
+  names: React.PropTypes.arrayOf(React.PropTypes.string),
+  people: React.PropTypes.typeOf(SomeCollectionOrSomething),
+  isWarning: React.PropTypes.bool,
   fetchData: React.PropTypes.func
-```
+}```
 
 (Especially because we often feed components arrays of models as well as collections)
 
@@ -709,7 +709,7 @@ class: middle, blue
 
 ## Wow that's a lot of files!
 
-It's not so bad: we have unique directory-like filenames and use search not file browsers:
+It's not so bad: we have (unique!) directory-like filenames and use search not file browsers:
 
 <img src='images/ctrl-p.gif' title='ctrp-p' class='ctrl-p' />
 
