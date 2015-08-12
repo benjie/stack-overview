@@ -127,6 +127,12 @@
         background-image: url('images/volunteers.jpg');
       }
 
+      .typeahead {
+        width: 90%;
+        display: block;
+        margin: 0 auto
+      }
+
       .so-many-files {
         width: 90%;
         display: block;
@@ -387,6 +393,13 @@ Timecounts.org
 <div class='backbone-image cover'></div>
 
 ---
+class: middle, center, blue
+
+### or:
+
+## "How We Learned To Stop Worrying and Love Having Lots Of Files"
+
+---
 
 class: timecounts-is, cover
 
@@ -408,6 +421,24 @@ class: middle
 
 class: middle
 
+# Stuff we'll cover
+
+1. Keeping on top of React
+
+2. Handling lots of files
+
+3. Keeping on top of styles
+
+4. Build
+
+5. ... and a little bit on testing
+
+
+---
+
+
+class: middle
+
 # Follow along
 
 [timecounts.github.io/stack-overview](http://timecounts.github.io/stack-overview)
@@ -423,12 +454,12 @@ Recommended... lots of detail on some slides
 
 class: full-screen-gif, bullet-train
 
-## Hold on tight; there's a lot to cover!
+## Hold on tight! Much presentation ahead!
 
 ---
 class: middle, center, brown
 
-#1. React, (C)JSX
+#1. Scaling React
 
 ---
 
@@ -438,10 +469,11 @@ class: middle
 
 One-way data flow (`state`, `props`)
 
-Virtual DOM
-
 Components
 
+.aside[
+...and then there's the Virtual DOM, but you can ignore that
+]
 
 ---
 
@@ -475,17 +507,15 @@ Parent = React.createClass(
 
 ---
 
-class: middle
+class: middle, center, blue
 
-# CoffeeScript sneakiness
-
-We use CoffeeScript... And we noticed a cunning trick
+## Tip: just use JSX and don't have inline logic
 
 ---
 
 class: middle, has-code
 
-## Look how quick we can write code!
+## We tried to be clever
 
 ```CoffeeScript
 {div, p} = React.DOM
@@ -493,26 +523,8 @@ class: middle, has-code
 MyComponent = React.createClass
 
   render: ->
-    div className: "foo",
-      div className: "sub-foo",
-        p null, "Something goes here"
-
-```
-
----
-
-class: middle, has-code
-
-## This was a mistake. Unreadable:
-
-```CoffeeScript
-{div, p} = React.DOM
-
-MyComponent = React.createClass
-
-  render: ->
-    div className: "foo",
-      div className: "sub-foo",
+    div className: "Foo",
+      div className: "SubFoo",
         if @props.flag
           for i in @props.array
             div null, "Count is #{i}"
@@ -522,17 +534,130 @@ MyComponent = React.createClass
             div null, "Not counting"
 
 ```
+We love CoffeeScript, but urgh! So hard to read
+
 
 ---
 
-class: middle, left
+class: middle, has-code
+
+## Much less ambiguous - if longer
+```CoffeeScript
+
+renderIncrements: ->
+  nodes = []
+  for val, i in this.props.array
+    nodes.push <div>Count is { val }</div>
+    break if i > 10
+  return <div>{ nodes }</div>
+
+renderCount: ->
+  if this.props.flag
+    return this.renderIncrements()
+  else
+    return <div>Not counting</div>
+
+render: ->
+  <div className="Foo">
+    <div className="SubFoo">
+      { this.renderCount() }
+    </div>
+  </div>
+
+```
+
+---
+class: middle, center, blue
+
+## Tip: push `this.state` as far up as it can go
+
+---
+
+class: has-code
+
+## Consider a typeahead:
+
+<img src='images/typeahead.png' title='Typeahead' class='typeahead' />
+
+---
+class: middlde, has-code
+
+### If you do this, `Selector` is really hard to re-use
+
+```JS
+// Typeahead
+handleKeyUp: function() {
+  this.refs.selector.moveSelection()
+},
+getValue: function() {
+  return this.refs.selector.getValue()
+},
+render: function() {
+  <div>
+    <Input  onKeyUp={ this.handleKeyUp } ... blah />
+    <Selector ... blah />
+  </div>
+}
+
+// Selector
+moveSelection: function() {
+  var newSelectedId = this.state.selectedId + 1;
+  this.setState({selectedId: newSelectedId })
+}
+
+```
+
+---
+class: middle, has-code
+
+### Instead, do this:
+```JS
+// Typeahead
+handleKeyUp: function() {
+  var newSelectedId = this.state.selectedId + 1;
+  this.setState({selectedId: newSelectedId })
+},
+getValue: function() {
+  return this.state.selectedId
+},
+render: function() {
+  <div>
+    <Input  onKeyUp={ this.handleKeyUp } ... blah />
+    <Selector selectedid={ this.state.selectedId } ... blah />
+  </div>
+}
+
+// Selector
+// ...only renders
+```
+---
+
+class: middle, center, blue
+
+## Use `propTypes` to define an API
 
 
-# Instead we:
+---
 
-- Use (C)JSX
-- Make lots and lots (ideally small) components
-- Use lots of render methods if we&rsquo;re feeling lazy
+class: middle, has-code, zoom-code
+
+## Reduces ambiguity
+
+```CoffeeScript
+propTypes:
+  names: React.PropTypes.arrayOf(React.PropTypes.string)
+  people: React.PropTypes.typeOf(SomeCollectionOrSomething)
+  isWarning: React.ProTypes.bool
+  fetchData: React.PropTypes.func
+```
+
+(Especially because we often feed components arrays of models as well as collections)
+
+---
+
+class: middle, blue, center
+
+## Use lots and lots of small, dumb components
 
 ---
 
@@ -579,11 +704,12 @@ class: middle, blue
 
 ---
 
+
 class: middle, blue
 
 ## Wow that's a lot of files!
 
-Yep, but it's not so bad: use search not file browsers:
+It's not so bad: we have unique directory-like filenames and use search not file browsers:
 
 <img src='images/ctrl-p.gif' title='ctrp-p' class='ctrl-p' />
 
